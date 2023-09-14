@@ -4,7 +4,7 @@ class UserSerializer < ActiveModel::Serializer
  
 
   def cart
-    self.object.orders.where(open: true).first.order_items.map{ |i| {product: i.product, order_qty:i.order_qty}}
+    self.object.orders.where(open: true).first.order_items.map{ |i| {id: i.id, product: i.product, order_qty:i.order_qty}}
   end
 
   def closed_orders

@@ -15,11 +15,17 @@ class OrdersController < ApplicationController
         order_item.update!(product_params)
         render json: order_item, status: :created
 
+        #   params - /:order_item_id
         #   { "product": { "id": 6, "order_qty": 1 } }
 
     end
 
-  
+    def remove_from_cart
+        order = get_user.orders.find_by(open: true)
+        order.order_items.find(params[:order_item_id]).destroy
+        head :ok
+        #   params - /:order_item_id
+    end
     
 
     private
