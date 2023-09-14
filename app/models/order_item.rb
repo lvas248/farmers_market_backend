@@ -2,7 +2,6 @@ class OrderItem < ApplicationRecord
   belongs_to :product
   belongs_to :order
 
-  validates :product, uniqueness: true
   validate :confirm_inventory_available
 
   before_update :destroy_zero_order_qty

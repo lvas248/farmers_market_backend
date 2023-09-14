@@ -1,15 +1,16 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :username, :cart, :closed_orders
+  attributes :username, :cart
 
- 
+  has_many :orders
 
   def cart
-    self.object.orders.where(open: true).first.order_items.map{ |i| {id: i.id, product: i.product, order_qty:i.order_qty}}
+    order = self.object.orders.find_by(open: true)
+    if order
+      return order.order_items.map{ |i| {id: i.id, product: i.product, order_qty:i.order_qty}}
+    end
   end
 
-  def closed_orders
-    self.object.orders.where(open: false)
-  end
+ 
 
   
 
