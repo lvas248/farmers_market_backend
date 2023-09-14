@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
 
 
-  resources :products
+  get '/products', to: 'products#index'
+  patch '/products', to: 'products#reset_inventory_levels'
+
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
 
