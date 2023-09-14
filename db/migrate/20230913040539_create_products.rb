@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.string :description
       t.float :price
       t.string :image
-      t.integer :qty
+      t.integer :qty_avail
       t.string :season
       t.string :produce_type
 

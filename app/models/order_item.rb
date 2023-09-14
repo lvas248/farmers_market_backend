@@ -9,8 +9,8 @@ class OrderItem < ApplicationRecord
 
 
   def confirm_inventory_available
-    unless self.qty <= self.product.qty
-      errors.add(:qty, "Not enough inventory")
+    unless self.order_qty <= self.product.qty_avail
+      errors.add(:order_qty, "Not enough inventory to fulfill")
     end
   end
   
