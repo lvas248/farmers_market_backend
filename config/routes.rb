@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   
 
 
-  post '/orders', to: 'orders#addToCart'
+  post '/orders', to: 'orders#add_to_cart'
+  patch '/orders/:order_item_id', to: 'orders#update_cart'
 
   get '/products', to: 'products#index'
   patch '/products', to: 'products#reset_inventory_levels'

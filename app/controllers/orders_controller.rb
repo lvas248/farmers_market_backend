@@ -1,21 +1,26 @@
 class OrdersController < ApplicationController
 
-    def addToCart
-        #if user is loggedIn, find or createby cart (open: true)
+    def add_to_Cart
         order = get_user.orders.find_or_create_by(open: true)
-              
-
         order_item =  order.order_items.find_by(product_id: product_params[:product_id])
-        
-
-
-        if order_item
-            order_item.update!(order_qty: order_item.order_qty + product_params[:order_qty])
-        else
-            order_item = order.order_items.create!(product_params)
-        end
+        order_item ? order_item.update!(order_qty: order_item.order_qty + product_params[:order_qty]) : order_item = order.order_items.create!(product_params)
         render json: order_item, status: :created
+
+        #   { "product": { "id": 6, "order_qty": 1 } }
     end
+
+    def update_cart
+        order = get_user.orders.find_by(open: true)
+        order_item = order.order_items.find(params[:order_item_id])
+        order_item.update!(product_params)
+        render json: order_item, status: :created
+
+        #   { "product": { "id": 6, "order_qty": 1 } }
+
+    end
+
+  
+    
 
     private
 
