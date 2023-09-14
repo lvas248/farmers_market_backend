@@ -242,3 +242,6 @@
     produce_type: 'veggie',
   },
 ].each {|p| Product.create!(p)}
+
+user = User.create!({username: 'user', password: '123', password_confirmation:'123'})
+
